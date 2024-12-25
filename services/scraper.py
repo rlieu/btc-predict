@@ -23,22 +23,28 @@ PRICES_QUERY = """
 """
 
 def save_current_prices(url=None):
-  with sync_playwright() as playwright, playwright.chromium.launch(headless=False) as browser:
-    context = browser.new_context(
-      user_agent=os.environ.get("USER_AGENT")
-    )
+  try:
+    with sync_playwright() as playwright, playwright.chromium.launch(headless=False) as browser:
+      context = browser.new_context(
+        user_agent=os.environ.get("USER_AGENT")
+      )
 
-    page = agentql.wrap(context.new_page())
+      page = agentql.wrap(context.new_page())
 
-    page_url = url if url != None else INITIAL_URL
-    page.goto(page_url)
+      page_url = url if url != None else INITIAL_URL
+      page.goto(page_url)
 
-    response = page.query_data(PRICES_QUERY)
-    print(response)
+      response = page.query_data(PRICES_QUERY)
+      print(response)
 
-    csv_dir = pathlib.Path().parent.joinpath("./data/price_data.csv")
+      csv_dir = pathlib.Path().parent.joinpath("./data/price_data.csv")
 
-    with open(csv_dir, "w", encoding="utf-8") as file:
-      file.write("Name, Price, 24H Change, 24H Volume, Market Cap\n")
-      for item in response["cryptocurrency_prices"]:
-        file.write(f"{item["name"]},{item["price"]},{item["change_24h"]},{item["volume_24h"],{item["market_cap"]}}\n")
+      with open(csv_dir, "w", encoding="utf-8") as file:
+        file.write("Name, Price, 24H Change, 24H Volume, Market Cap\n")
+        for item in response["cryptocurrency_prices"]:
+          file.write(f"{item["name"]},{item["price"]},{item["change_24h"]},{item["volume_24h"],{item["market_cap"]}}\n")
+
+      return response
+  except Exception as e:
+    print(e)
+    return "Error saving current price data."
