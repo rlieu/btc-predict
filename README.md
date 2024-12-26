@@ -40,6 +40,11 @@
 6. Plot the results
 
 ## Applications
+
+### Next.js web app for [Chat UI](./web/README.md)
+- Wrapper for [OpenAI API](https://platform.openai.com/docs/overview)  
+- TODO: add agent tools and connect with [Flask API Routes](#flask-api-routes)
+
 ### Flask API Routes
 
 ```
