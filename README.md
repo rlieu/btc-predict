@@ -27,7 +27,7 @@
 3. Split data into train / test sets  
 4. Tune hyperparameters  
 5. Build and train LSTM model  
-6. Save best model to pickle file  
+6. Save best model to joblib file  
 7. Plot the results
 
 ### The following is performed in [lstm_pytorch.ipynb](./notebooks/lstm_pytorch.ipynb)

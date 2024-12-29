@@ -1,10 +1,13 @@
 import sys
 sys.path.append("../")
 
-from flask import Flask, render_template, request
+import joblib
+from flask import Flask, request
 from services.scraper import save_current_prices
 from services.coinmarketcap import save_historical_price
-import pickle 
+from services.utils import model_forecast
+
+model = joblib.load("model.joblib")
 
 app = Flask(__name__)
 
@@ -19,9 +22,8 @@ def predict():
             return "No series data provided."
         
         #get prediction
-        model = pickle.load(open('model.pkl','rb'))
-        prediction = model.predict(series)
-        return prediction
+        prediction = model_forecast(model, series)
+        return prediction.tolist()
 
 @app.route("/save-current-prices", methods=['POST'])
 def save_current_prices():
