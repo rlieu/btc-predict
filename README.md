@@ -43,13 +43,13 @@
 
 ### Next.js web app for [Chat UI](./web/README.md)
 - Wrapper for [OpenAI API](https://platform.openai.com/docs/overview)  
-- TODO: add agent tools and connect with [Flask API Routes](#flask-api-routes)
+- TODO: add agent tools and connect with [FastAPI Routes](#fastapi-routes)
 
-### Flask API Routes
+### FastAPI Routes
 
 ```
 cd api/
-python -m flask run
+fastapi dev main.py
 ```
 
 1. /predict - loads the pretrained model to make predictions  
