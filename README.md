@@ -76,3 +76,17 @@ fastapi dev main.py
   "symbol": "BTC"
 }
 ```
+
+### Run using Kubernetes
+
+```
+docker run -d -p 6000:5000 --name local-registry registry:2
+docker build -t localhost:6000/fastapi-app:latest .
+docker push localhost:6000/fastapi-app:latest
+
+minikube start --insecure-registry="localhost:6000"
+minikube image load localhost:6000/fastapi-app:latest
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+minikube service fastapi-service --url
+```

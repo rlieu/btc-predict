@@ -1,3 +1,4 @@
+import os
 import sys
 sys.path.append("../")
 
@@ -8,7 +9,12 @@ from services.scraper import save_current_prices
 from services.coinmarketcap import save_historical_price
 from services.utils import model_forecast
 
-model = joblib.load("model.joblib")
+if os.getenv("RUN_ENV") == "docker":
+    model_path = "/app/api/model.joblib"
+else:
+    model_path = "model.joblib"
+
+model = joblib.load(model_path)
 
 app = FastAPI()
 
