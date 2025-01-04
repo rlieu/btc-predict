@@ -32,7 +32,8 @@ def save_historical_price(symbol, interval="24h", count=100):
     print("QUOTES: ", all_quotes)
 
     df_quotes = pd.DataFrame(all_quotes)
-    df_quotes.to_csv(f"../data/quotes_{symbol}.csv")
+    df_quotes['symbol'] = symbol
+    df_quotes.to_csv(f"quotes_{symbol}.csv")
 
     return all_quotes
   except Exception as e:

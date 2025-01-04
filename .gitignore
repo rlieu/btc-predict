@@ -3,3 +3,6 @@
 .venv
 old/
 __pycahce__/
+
+# airflow
+logs/
