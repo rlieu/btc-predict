@@ -13,7 +13,12 @@
 1. Get current price, volume, and market cap data using AgentQL and Playwright  
 2. Save data to [CSV](./data/price_data.csv)
 
-## Model Training and Selection
+## Exploration and Preprocessing
+### Anomaly Detection (Unsupervised)
+
+#### [k-Means Clustering](./notebooks/anomaly_detection.ipynb)
+
+## Model Training and Selection (Supervised)
 ### The following is performed in [arma_statsmodels.ipynb](./notebooks/arma_statsmodels.ipynb)
 
 1. Create DataFrame using CSV  
