@@ -2,6 +2,7 @@ import os
 import requests
 import pandas as pd
 from dotenv import load_dotenv
+from utils import process_historical_price
 
 load_dotenv()
 
@@ -32,7 +33,8 @@ def save_historical_price(symbol, interval="24h", count=100):
     print("QUOTES: ", all_quotes)
 
     df_quotes = pd.DataFrame(all_quotes)
-    df_quotes.to_csv(f"../data/quotes_{symbol}.csv")
+    df_quotes = process_historical_price(df_quotes)
+    df_quotes.to_csv(f"../data/quotes_{symbol}_{interval}.csv")
 
     return all_quotes
   except Exception as e:
